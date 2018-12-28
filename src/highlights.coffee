@@ -3,8 +3,8 @@ _ = require 'underscore-plus'
 fs = require 'fs-plus'
 CSON = require 'season'
 once = require 'once'
-{GrammarRegistry} = require 'first-mate'
-Selector = require 'first-mate-select-grammar'
+GrammarRegistry = require './grammar-registry'
+Selector = require './grammar-selector'
 selector = Selector()
 
 

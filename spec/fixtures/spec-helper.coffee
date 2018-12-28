@@ -1,0 +1,2 @@
+onigasm = require '../../onigasm/lib'
+onigasm.loadWASM()
