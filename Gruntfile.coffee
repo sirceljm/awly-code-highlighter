@@ -6,7 +6,8 @@ module.exports = (grunt) ->
       main:
         files: [
           expand: true
-          src: ['src/*.js']
+          cwd: 'src'
+          src: ['*.js']
           dest: 'lib/'
         ]
 
