@@ -91,3 +91,6 @@
 [submodule "deps/language-typescript"]
 	path = deps/language-typescript
 	url = https://github.com/atom/language-typescript
+[submodule "deps/language-marko"]
+	path = deps/language-marko
+	url = https://github.com/marko-js/atom-language-marko
