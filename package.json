@@ -1,7 +1,7 @@
 {
-  "name": "highlights",
-  "version": "3.1.1",
-  "description": "Syntax highlighter",
+  "name": "awly-code-highlighter",
+  "version": "3.1.1-alpha.0",
+  "description": "Atoms Highlights code highlighter made to work with Wab Assembly build Oniguruma library",
   "main": "src/highlights.js",
   "scripts": {
     "test": "grunt test",
@@ -11,13 +11,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/atom/highlights"
+    "url": "https://github.com/sirceljm/awly-code-highlighter"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/atom/highlights/issues"
+    "url": "https://github.com/sirclejm/awly-code-highlighter/issues"
   },
-  "homepage": "https://github.com/atom/highlights",
   "dependencies": {
     "emissary": "^1",
     "fs-plus": "^3.0.0",
