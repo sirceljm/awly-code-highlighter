@@ -25,7 +25,8 @@
     "underscore-plus": "^1.5.1",
     "yargs": "^4.7.1",
     "lru-cache": "^4.1.1",
-    "event-kit": "^2.2.0"
+    "event-kit": "^2.2.0",
+    "grim": "^2.0.1"
   },
   "devDependencies": {
     "grim": "^2.0.1",
