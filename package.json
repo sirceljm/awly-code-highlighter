@@ -1,6 +1,6 @@
 {
   "name": "awly-code-highlighter",
-  "version": "3.1.1-alpha.0",
+  "version": "3.1.2",
   "description": "Atoms Highlights code highlighter made to work with Wab Assembly build Oniguruma library",
   "main": "src/highlights.js",
   "scripts": {
