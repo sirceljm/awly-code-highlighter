@@ -69,8 +69,8 @@ module.exports =
         }
 
         /*
-    Section: Event Subscription
-    */
+        Section: Event Subscription
+        */
 
         // Public: Invoke the given callback when this grammar is updated due to a
         // grammar it depends on being added or removed from the registry.
@@ -83,8 +83,8 @@ module.exports =
         }
 
         /*
-    Section: Tokenizing
-    */
+        Section: Tokenizing
+        */
 
         // Public: Tokenize all lines in the given text.
         //
@@ -189,21 +189,25 @@ module.exports =
             let position = 0;
             let tokenCount = 0;
 
-            while (true) {
+            let repeat = true;
+            while (repeat) {
                 var match;
                 const previousRuleStackLength = ruleStack.length;
                 const previousPosition = position;
 
                 if (position > line.length) {
+                    repeat = false;
                     break;
                 }
 
                 if (tokenCount >= (this.getMaxTokensPerLine() - 1)) {
                     truncatedLine = true;
+                    repeat = false;
                     break;
                 }
 
-                if (match = _.last(ruleStack).rule.getNextTags(ruleStack, string, stringWithNewLine, position, firstLine)) {
+                match = _.last(ruleStack).rule.getNextTags(ruleStack, string, stringWithNewLine, position, firstLine);
+                if (match) {
                     const {nextTags, tagsStart, tagsEnd} = match;
 
                     // Unmatched text before next tags
@@ -225,6 +229,7 @@ module.exports =
                     if ((position < line.length) || (line.length === 0)) {
                         tags.push(line.length - position);
                     }
+                    repeat = false;
                     break;
                 }
 
@@ -243,6 +248,7 @@ module.exports =
                             if ((position < line.length) || ((line.length === 0) && (tags.length === 0))) {
                                 tags.push(line.length - position);
                             }
+                            repeat = false;
                             break;
                         }
                     } else if (ruleStack.length > previousRuleStackLength) { // Stack size increased with zero length match
@@ -266,6 +272,7 @@ module.exports =
                                 tags.pop(); // also pop the duplicated start scope if it was pushed
                             }
                             tags.push(line.length - position);
+                            repeat = false;
                             break;
                         }
                     }
@@ -426,12 +433,11 @@ if (Grim.includeDeprecatedAPIs) {
 
 class TokenizeLineResult {
     static initClass() {
-
-        Object.defineProperty(this.prototype, "tokens", { get() {
-            return this.registry.decodeTokens(this.line, this.tags, this.openScopeTags);
-        }
-        }
-        );
+        Object.defineProperty(this.prototype, "tokens", {
+            get() {
+                return this.registry.decodeTokens(this.line, this.tags, this.openScopeTags);
+            }
+        });
     }
     constructor(line, openScopeTags, tags, ruleStack, registry) {
         this.line = line;

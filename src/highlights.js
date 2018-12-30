@@ -85,8 +85,6 @@ module.exports =
     // per line and each line will contain one or more <span> elements for the
     // tokens in the line. All grammar loading and fs operations are async so you can use this module in a server or busy process.
     highlight(param, cb) {
-
-
         if (param == null) {
             param = {};
         }
@@ -136,8 +134,8 @@ module.exports =
         }
 
         for (let file of Array.from(fs.readdirSync(grammarsDir))) {
-            var grammarPath;
-            if (grammarPath = CSON.resolve(path.join(grammarsDir, file))) {
+            var grammarPath = CSON.resolve(path.join(grammarsDir, file));
+            if (grammarPath) {
                 this.registry.loadGrammarSync(grammarPath);
             }
         }
@@ -238,7 +236,6 @@ module.exports =
     }
 
     _highlightCommon(param) {
-
         if (param == null) {
             param = {};
         }
@@ -475,7 +472,7 @@ module.exports =
         scopeStack.push(scope);
         if (scope) {
             const className = this.scopePrefix + scope.replace(/\.+/g, ` ${this.scopePrefix}`);
-            return html += `<span class=\"${className}\">`;
+            return html += `<span class="${className}">`;
         } else {
             return html += "<span>";
         }

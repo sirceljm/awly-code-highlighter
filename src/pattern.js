@@ -166,8 +166,7 @@ module.exports =
     }
 
     resolveScopeName(scopeName, line, captureIndices) {
-        let resolvedScopeName;
-        return resolvedScopeName = scopeName.replace(AllCustomCaptureIndicesRegex, function(match, index, commandIndex, command) {
+        let resolvedScopeName = scopeName.replace(AllCustomCaptureIndicesRegex, function(match, index, commandIndex, command) {
             const capture = captureIndices[parseInt(index != null ? index : commandIndex)];
             if (capture != null) {
                 let replacement = line.substring(capture.start, capture.end);
@@ -184,6 +183,8 @@ module.exports =
                 return match;
             }
         });
+
+        return resolvedScopeName;
     }
 
     handleMatch(stack, line, captureIndices, rule, endPatternMatch) {
@@ -287,12 +288,14 @@ module.exports =
         const parentCapture = currentCaptureIndices.shift();
 
         const tags = [];
-        if (scope = this.captures[parentCapture.index] != null ? this.captures[parentCapture.index].name : undefined) {
+        scope = this.captures[parentCapture.index];
+        if (scope != null ? this.captures[parentCapture.index].name : undefined) {
             parentCaptureScope = this.resolveScopeName(scope, line, allCaptureIndices);
             tags.push(this.grammar.startIdForScope(parentCaptureScope));
         }
 
-        if (captureRule = this.captures[parentCapture.index] != null ? this.captures[parentCapture.index].rule : undefined) {
+        captureRule = this.captures[parentCapture.index];
+        if (captureRule != null ? this.captures[parentCapture.index].rule : undefined) {
             captureTags = this.tagsForCaptureRule(captureRule, line, parentCapture.start, parentCapture.end, stack);
             tags.push(...Array.from(captureTags || []));
             // Consume child captures

@@ -63,8 +63,8 @@ module.exports =
     }
 
     getScanner(baseGrammar) {
-        let scanner;
-        if (scanner = this.scannersByBaseGrammarName[baseGrammar.name]) {
+        let scanner = this.scannersByBaseGrammarName[baseGrammar.name];
+        if (scanner) {
             return scanner;
         }
 
@@ -77,7 +77,8 @@ module.exports =
     scanInjections(ruleStack, line, position, firstLine) {
         let injections;
         const baseGrammar = ruleStack[0].rule.grammar;
-        if (injections = baseGrammar.injections) {
+        injections = baseGrammar.injections;
+        if (injections) {
             for (let scanner of Array.from(injections.getScanners(ruleStack))) {
                 const result = scanner.findNextMatch(line, firstLine, position, this.anchorPosition);
                 if (result != null) {
@@ -101,11 +102,13 @@ module.exports =
         const results = [];
 
         let scanner = this.getScanner(baseGrammar);
-        if (result = scanner.findNextMatch(lineWithNewline, firstLine, position, this.anchorPosition)) {
+        result = scanner.findNextMatch(lineWithNewline, firstLine, position, this.anchorPosition);
+        if (result) {
             results.push(result);
         }
 
-        if (result = this.scanInjections(ruleStack, lineWithNewline, position, firstLine)) {
+        result = this.scanInjections(ruleStack, lineWithNewline, position, firstLine);
+        if (result) {
             for (let injection of Array.from(baseGrammar.injections.injections)) {
                 if (injection.scanner === result.scanner) {
                     if (injection.selector.getPrefix(this.grammar.scopesFromStack(ruleStack)) === "L") {
@@ -133,7 +136,8 @@ module.exports =
             }
             if (injectionGrammar.injectionSelector.matches(scopes)) {
                 scanner = injectionGrammar.getInitialRule().getScanner(injectionGrammar, position, firstLine);
-                if (result = scanner.findNextMatch(lineWithNewline, firstLine, position, this.anchorPosition)) {
+                result = scanner.findNextMatch(lineWithNewline, firstLine, position, this.anchorPosition);
+                if (result) {
                     if (injectionGrammar.injectionSelector.getPrefix(scopes) === "L") {
                         results.unshift(result);
                     } else {
@@ -168,7 +172,8 @@ module.exports =
         const {index, captureIndices, scanner} = result;
         const [firstCapture] = Array.from(captureIndices);
         const endPatternMatch = this.endPattern === scanner.patterns[index];
-        if (nextTags = scanner.handleMatch(result, ruleStack, line, this, endPatternMatch)) {
+        nextTags = scanner.handleMatch(result, ruleStack, line, this, endPatternMatch);
+        if (nextTags) {
             return {nextTags, tagsStart: firstCapture.start, tagsEnd: firstCapture.end};
         }
     }
