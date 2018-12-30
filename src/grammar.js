@@ -8,10 +8,8 @@
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
 let Grammar;
-const path = require("path");
 
 const _ = require("underscore-plus");
-const fs = require("fs-plus");
 const {loadWASM, OnigRegExp, OnigString} = require("../onigasm/lib");
 const {Emitter} = require("event-kit");
 const Grim = require("grim");

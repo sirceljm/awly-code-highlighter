@@ -1,2 +1,2 @@
-const onigasm = require('../../onigasm/lib');
+const onigasm = require("../../onigasm/lib");
 onigasm.loadWASM();

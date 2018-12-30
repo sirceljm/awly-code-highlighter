@@ -6,14 +6,11 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-let Injections;
-const _ = require("underscore-plus");
-
 const Scanner = require("./scanner");
 const ScopeSelector = require("./scope-selector");
 
 module.exports =
-(Injections = class Injections {
+(class Injections {
     constructor(grammar, injections) {
         this.grammar = grammar;
         if (injections == null) {

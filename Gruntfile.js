@@ -7,24 +7,12 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON("package.json"),
 
-        copy: {
-            main: {
-                files: [{
-                    expand: true,
-                    cwd: "src",
-                    src: ["*.js"],
-                    dest: "lib/"
-                }
-                ]
-            }
-        },
-
         peg: {
             glob_to_multiple: {
                 expand: true,
                 cwd: "src",
                 src: ["*.pegjs"],
-                dest: "lib",
+                dest: "src",
                 ext: ".js"
             }
         },
@@ -46,16 +34,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks("grunt-peg");
     grunt.loadTasks("tasks");
 
-    grunt.registerTask("clean", function() {
-        if (grunt.file.exists("lib")) {
-            grunt.file.delete("lib");
-        }
-        if (grunt.file.exists("gen")) {
-            return grunt.file.delete("gen");
-        }
-    });
-
-    grunt.registerTask("default", ["copy", "peg", "build-grammars"]);
+    grunt.registerTask("default", ["peg", "build-grammars"]);
     grunt.registerTask("test", ["default", "shell:test"]);
-    return grunt.registerTask("prepublish", ["clean", "build-grammars", "test"]);
+    return grunt.registerTask("prepublish", ["build-grammars", "test"]);
 };

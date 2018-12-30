@@ -7,7 +7,6 @@
  * DS207: Consider shorter variations of null checks
  * Full docs: https://github.com/decaffeinate/decaffeinate/blob/master/docs/suggestions.md
  */
-let Highlights;
 const path = require("path");
 const _ = require("underscore-plus");
 const fs = require("fs-plus");
@@ -19,7 +18,7 @@ const selector = Selector();
 
 
 module.exports =
-(Highlights = class Highlights {
+(class Highlights {
     // Public: Create a new highlighter.
     //
     // options - An Object with the following keys:
